@@ -83,11 +83,18 @@ class Flock
 
   # Implements the flocking algorthim by collecting the three components
   # and returning a weighted sum.
-  _flock: (b, neighbours) ->
+  _default_flock: (b, neighbours) ->
     separation = @_separate(b, neighbours).multiply(@_options.seperation_weight)
     alignment = @_align(b, neighbours).multiply(@_options.alignment_weight)
     cohesion = @_cohere(b, neighbours).multiply(@_options.cohesion_weight)
     return separation.add(alignment).add(cohesion)
+
+ _flock: (b, neighbours) ->
+    separation = @_separate(b, neighbours).multiply(@_options.seperation_weight)
+    alignment = @_align(b, neighbours).multiply(@_options.alignment_weight)
+    cohesion = @_cohere(b, neighbours).multiply(@_options.cohesion_weight)
+    return separation.add(alignment).add(cohesion)
+
 
   # Separation component for the frame's acceleration
   _separate: (b, neighbours) ->
